@@ -1,0 +1,35 @@
+{
+  "name": "sendinblue/2fa-bundle",
+  "description": "Add two factor authentication into Symfony",
+  "type": "symfony-bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "SendinBlue Developers",
+      "email": "contact@sendinblue.com",
+      "homepage": "https://www.sendinblue.com/"
+    }
+  ],
+  "require": {
+    "psr/log": "^1",
+    "symfony/config": "^2|^3|^4",
+    "symfony/dependency-injection": "^2|^3|^4",
+    "symfony/event-dispatcher": "^2.1|^3|^4",
+    "symfony/http-kernel": "^2.4|^3|^4",
+    "symfony/security": "^2.6|^3|^4",
+    "symfony/security-bundle": "^2.3|^3|^4"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2",
+    "phpunit/phpunit": "^5"
+  },
+  "suggest": {
+    "sendinblue/otp": "Allow authenticating with HOTP or TOTP"
+  },
+  "autoload": {
+    "psr-4": { "SendinBlue\\Bundle\\TwoFactorAuthenticationBundle\\" : "" },
+    "exclude-from-classmap": [
+      "/Tests/"
+    ]
+  }
+}

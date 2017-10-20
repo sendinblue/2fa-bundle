@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service
+            id="security.authentication.provider.2fa"
+            class="SendinBlue\Bundle\TwoFactorAuthenticationBundle\Security\Authentication\Provider\SecondFactorProvider"
+            abstract="true"
+        />
+
+        <service
+            id="security.authentication.listener.2fa"
+            class="SendinBlue\Bundle\TwoFactorAuthenticationBundle\Security\Firewall\SecondFactorListener"
+            abstract="true"
+        >
+            <argument type="service" id="security.firewall.map" />
+            <argument type="service" id="security.token_storage" />
+            <argument /> <!-- user provider -->
+            <argument type="service" id="security.authentication.session_strategy" />
+            <argument type="service" id="security.http_utils" />
+            <argument type="service" id="event_dispatcher" />
+            <argument /> <!-- authenticators -->
+            <argument /> <!-- options -->
+            <argument type="service" id="logger" on-invalid="null" />
+        </service>
+
+        <service
+            id="sendinblue_2fa.code_authenticator"
+            class="SendinBlue\Bundle\TwoFactorAuthenticationBundle\Authenticator\CodeAuthenticator"
+            abstract="true"
+        >
+            <argument type="service" id="security.http_utils" />
+            <argument /> <!-- credentials checker -->
+            <argument /> <!-- options -->
+            <argument>null</argument> <!-- failure handler -->
+            <argument>null</argument> <!-- success handler -->
+        </service>
+
+        <service
+            id="sendinblue_2fa.otp_checker"
+            class="SendinBlue\Bundle\TwoFactorAuthenticationBundle\Checker\OtpChecker"
+        />
+
+        <service
+            id="sendinblue_2fa.recovery_code_checker"
+            class="SendinBlue\Bundle\TwoFactorAuthenticationBundle\Checker\RecoveryCodeChecker"
+        />
+    </services>
+</container>
